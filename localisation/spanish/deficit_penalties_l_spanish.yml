@@ -1,0 +1,33 @@
+﻿l_spanish:
+
+ deficit_penalties_minerals_modifier:0 "Minerals Deficit"
+ deficit_penalties_minerals_modifier_desc:0 "We are consuming more minerals than we produce."
+ minerals_deficit_tooltip:0 "We are consuming more minerals than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_energy_modifier:0 "Energy Deficit"
+ deficit_penalties_energy_modifier_desc:0 "We are consuming more energy than we produce."
+ energy_deficit_tooltip:0 "We are consuming more energy than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_food_modifier:0 "Food Deficit"
+ deficit_penalties_food_modifier_desc:0 "We are consuming more food than we produce."
+ food_deficit_tooltip:0 "We are consuming more food than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_alloys_modifier:0 "Alloys Deficit"
+ deficit_penalties_alloys_modifier_desc:0 "We are consuming more alloys than we produce."
+ alloys_deficit_tooltip:0 "We are consuming more alloys than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_consumer_goods_modifier:0 "Consumer Goods Deficit"
+ deficit_penalties_consumer_goods_modifier_desc:0 "We are consuming more consumer goods than we produce."
+ consumer_goods_deficit_tooltip:0 "We are consuming more consumer goods than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_volatile_motes_modifier:0 "Volatile Motes Deficit"
+ deficit_penalties_volatile_motes_modifier_desc:0 "We are consuming more volatile motes than we produce."
+ volatile_motes_deficit_tooltip:0 "We are consuming more volatile motes than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_exotic_gases_modifier:0 "Exotic Gases Deficit"
+ deficit_penalties_exotic_gases_modifier_desc:0 "We are consuming more exotic gases than we produce."
+ exotic_gases_deficit_tooltip:0 "We are consuming more exotic gases than we produce. Check Empire Modifiers for details."
+
+ deficit_penalties_rare_crystals_modifier:0 "Rare Crystals Deficit"
+ deficit_penalties_rare_crystals_modifier_desc:0 "We are consuming more rare crystals than we produce."
+ rare_crystals_deficit_tooltip:0 "We are consuming more rare crystals than we produce. Check Empire Modifiers for details."
