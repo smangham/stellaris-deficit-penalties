@@ -1,0 +1,41 @@
+### RESOURCE DEFICITS
+
+energy_deficit = {
+	custom_tooltip =energy_deficit_tooltip
+}
+
+minerals_deficit = {
+	custom_tooltip = minerals_deficit_tooltip
+}
+
+food_deficit = {
+	custom_tooltip = food_deficit_tooltip
+}
+
+influence_deficit = {
+	pop_happiness = -0.20
+}
+
+alloys_deficit = {
+	custom_tooltip = alloys_deficit_tooltip
+}
+
+consumer_goods_deficit = {
+	custom_tooltip = consumer_goods_deficit_tooltip
+}
+
+volatile_motes_deficit = {
+	custom_tooltip = volatile_motes_deficit_tooltip
+}
+
+exotic_gases_deficit = {
+	custom_tooltip = exotic_gases_deficit_tooltip
+}
+
+rare_crystals_deficit = {
+	custom_tooltip = rare_crystals_deficit_tooltip
+}
+
+nanites_deficit = {
+	custom_tooltip = nanites_deficit_tooltip
+}

@@ -1,0 +1,691 @@
+namespace = deficit_penalties
+
+event = {
+	# Launches the deficit effects (if any)
+	id = deficit_penalties.1
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = minerals
+			}
+			country_event = {
+				id = deficit_penalties.100
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = energy
+			}
+			country_event = {
+				id = deficit_penalties.200
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = food
+			}
+			country_event = {
+				id = deficit_penalties.300
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = alloys
+			}
+			country_event = {
+				id = deficit_penalties.400
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = consumer_goods
+			}
+			country_event = {
+				id = deficit_penalties.500
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = exotic_gases
+			}
+			country_event = {
+				id = deficit_penalties.600
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = volatile_motes
+			}
+			country_event = {
+				id = deficit_penalties.700
+			}
+		}
+		every_country = {
+			limit = {
+				is_country_type = default
+				has_deficit = rare_crystals
+			}
+			country_event = {
+				id = deficit_penalties.800
+			}
+		}
+	}
+}
+
+# ==============================================================================
+# MINERALS
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.100
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_minerals_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_minerals_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_minerals_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = minerals
+			variable = deficit_penalties_minerals_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = minerals
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = minerals
+			variable = deficit_penalties_minerals_income
+		}
+		add_resource = {
+			minerals = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_minerals_multiplier
+			value = deficit_penalties_minerals_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_minerals_income
+			value = deficit_penalties_minerals_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_minerals_multiplier
+			value = deficit_penalties_minerals_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_minerals_modifier
+		add_modifier = {
+			modifier = deficit_penalties_minerals_modifier
+			days = 31
+			multiplier = deficit_penalties_minerals_multiplier
+		}
+	
+		clear_variable = deficit_penalties_minerals_income
+		clear_variable = deficit_penalties_minerals_deficit
+		clear_variable = deficit_penalties_minerals_multiplier	
+	}
+}
+
+# ==============================================================================
+# ENERGY
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.200
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_energy_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_energy_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_energy_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = energy
+			variable = deficit_penalties_energy_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = energy
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = energy
+			variable = deficit_penalties_energy_income
+		}
+		add_resource = {
+			energy = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_energy_multiplier
+			value = deficit_penalties_energy_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_energy_income
+			value = deficit_penalties_energy_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_energy_multiplier
+			value = deficit_penalties_energy_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_energy_modifier
+		add_modifier = {
+			modifier = deficit_penalties_energy_modifier
+			days = 31
+			multiplier = deficit_penalties_energy_multiplier
+		}
+	
+		clear_variable = deficit_penalties_energy_income
+		clear_variable = deficit_penalties_energy_deficit
+		clear_variable = deficit_penalties_energy_multiplier	
+	}
+}
+
+# ==============================================================================
+# FOOD
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.300
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_food_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_food_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_food_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = food
+			variable = deficit_penalties_food_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = food
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = food
+			variable = deficit_penalties_food_income
+		}
+		add_resource = {
+			food = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_food_multiplier
+			value = deficit_penalties_food_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_food_income
+			value = deficit_penalties_food_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_food_multiplier
+			value = deficit_penalties_food_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_food_modifier
+		add_modifier = {
+			modifier = deficit_penalties_food_modifier
+			days = 31
+			multiplier = deficit_penalties_food_multiplier
+		}
+	
+		clear_variable = deficit_penalties_food_income
+		clear_variable = deficit_penalties_food_deficit
+		clear_variable = deficit_penalties_food_multiplier	
+	}
+}
+
+# ==============================================================================
+# ALLOYS
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.400
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_alloys_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_alloys_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_alloys_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = alloys
+			variable = deficit_penalties_alloys_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = alloys
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = alloys
+			variable = deficit_penalties_alloys_income
+		}
+		add_resource = {
+			alloys = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_alloys_multiplier
+			value = deficit_penalties_alloys_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_alloys_income
+			value = deficit_penalties_alloys_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_alloys_multiplier
+			value = deficit_penalties_alloys_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_alloys_modifier
+		add_modifier = {
+			modifier = deficit_penalties_alloys_modifier
+			days = 31
+			multiplier = deficit_penalties_alloys_multiplier
+		}
+	
+		clear_variable = deficit_penalties_alloys_income
+		clear_variable = deficit_penalties_alloys_deficit
+		clear_variable = deficit_penalties_alloys_multiplier	
+	}
+}
+
+# ==============================================================================
+# CONSUMER GOODS
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.500
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_consumer_goods_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_consumer_goods_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_consumer_goods_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = consumer_goods
+			variable = deficit_penalties_consumer_goods_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = consumer_goods
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = consumer_goods
+			variable = deficit_penalties_consumer_goods_income
+		}
+		add_resource = {
+			consumer_goods = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_consumer_goods_multiplier
+			value = deficit_penalties_consumer_goods_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_consumer_goods_income
+			value = deficit_penalties_consumer_goods_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_consumer_goods_multiplier
+			value = deficit_penalties_consumer_goods_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_consumer_goods_modifier
+		add_modifier = {
+			modifier = deficit_penalties_consumer_goods_modifier
+			days = 31
+			multiplier = deficit_penalties_consumer_goods_multiplier
+		}
+	
+		clear_variable = deficit_penalties_consumer_goods_income
+		clear_variable = deficit_penalties_consumer_goods_deficit
+		clear_variable = deficit_penalties_consumer_goods_multiplier	
+	}
+}
+
+# ==============================================================================
+# EXOTIC GASES
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.600
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_exotic_gases_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_exotic_gases_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_exotic_gases_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = exotic_gases
+			variable = deficit_penalties_exotic_gases_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = exotic_gases
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = exotic_gases
+			variable = deficit_penalties_exotic_gases_income
+		}
+		add_resource = {
+			exotic_gases = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_exotic_gases_multiplier
+			value = deficit_penalties_exotic_gases_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_exotic_gases_income
+			value = deficit_penalties_exotic_gases_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_exotic_gases_multiplier
+			value = deficit_penalties_exotic_gases_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_exotic_gases_modifier
+		add_modifier = {
+			modifier = deficit_penalties_exotic_gases_modifier
+			days = 31
+			multiplier = deficit_penalties_exotic_gases_multiplier
+		}
+	
+		clear_variable = deficit_penalties_exotic_gases_income
+		clear_variable = deficit_penalties_exotic_gases_deficit
+		clear_variable = deficit_penalties_exotic_gases_multiplier	
+	}
+}
+
+# ==============================================================================
+# VOLATILE MOTES
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.700
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_volatile_motes_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_volatile_motes_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_volatile_motes_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = volatile_motes
+			variable = deficit_penalties_volatile_motes_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = volatile_motes
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = volatile_motes
+			variable = deficit_penalties_volatile_motes_income
+		}
+		add_resource = {
+			volatile_motes = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_volatile_motes_multiplier
+			value = deficit_penalties_volatile_motes_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_volatile_motes_income
+			value = deficit_penalties_volatile_motes_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_volatile_motes_multiplier
+			value = deficit_penalties_volatile_motes_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_volatile_motes_modifier
+		add_modifier = {
+			modifier = deficit_penalties_volatile_motes_modifier
+			days = 31
+			multiplier = deficit_penalties_volatile_motes_multiplier
+		}
+	
+		clear_variable = deficit_penalties_volatile_motes_income
+		clear_variable = deficit_penalties_volatile_motes_deficit
+		clear_variable = deficit_penalties_volatile_motes_multiplier	
+	}
+}
+
+# ==============================================================================
+# RARE CRYSTALS
+# ==============================================================================
+country_event = {
+	id = deficit_penalties.800
+	hide_window = yes
+	is_triggered_only = yes
+
+	immediate = {
+		# We set the modifier to -1, as we'll multiply it by a negative number
+		set_variable = {
+			which = deficit_penalties_rare_crystals_multiplier
+			value = -1
+		}
+		set_variable = {
+			which = deficit_penalties_rare_crystals_income
+			value = 0
+		}
+		set_variable = {
+			which = deficit_penalties_rare_crystals_deficit
+			value = 0
+		}
+
+		# Export the deficit (this bit is easy)
+		export_resource_income_to_variable = {
+			resource = rare_crystals
+			variable = deficit_penalties_rare_crystals_deficit
+		}
+
+		# Now, to get the total *income*, we add the current income, count it, then remove it
+		add_monthly_resource_mult = {
+			resource = rare_crystals
+			value = 1
+		}
+		export_resource_stockpile_to_variable = {
+			resource = rare_crystals
+			variable = deficit_penalties_rare_crystals_income
+		}
+		add_resource = {
+			rare_crystals = -999999
+		}
+
+		# -1 * (shortfall/[production + shortfall])
+		# e.g. if you have 100 production, 150 consumption so -50 deficit...
+		# -1 * (-50/[100 + 50]) = -1 * -1/3 = 33% penalty
+		multiply_variable = {
+			which = deficit_penalties_rare_crystals_multiplier
+			value = deficit_penalties_rare_crystals_deficit
+		}
+		# This bit does the "100 + 50" addition
+		subtract_variable = {
+			which = deficit_penalties_rare_crystals_income
+			value = deficit_penalties_rare_crystals_deficit
+		}
+		divide_variable = {
+			which = deficit_penalties_rare_crystals_multiplier
+			value = deficit_penalties_rare_crystals_income	
+		}
+
+		# Now we want to add the modifier, for the rest of the month, but by default a 30 day timer means
+		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
+		# won't re-apply it over itself next month and it then times out the next day.
+		# So, we need to remove the old 31-day modifier, then re-add it.
+		remove_modifier = deficit_penalties_rare_crystals_modifier
+		add_modifier = {
+			modifier = deficit_penalties_rare_crystals_modifier
+			days = 31
+			multiplier = deficit_penalties_rare_crystals_multiplier
+		}
+	
+		clear_variable = deficit_penalties_rare_crystals_income
+		clear_variable = deficit_penalties_rare_crystals_deficit
+		clear_variable = deficit_penalties_rare_crystals_multiplier	
+	}
+}

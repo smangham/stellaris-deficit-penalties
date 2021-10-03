@@ -1,0 +1,49 @@
+### RESOURCE DEFICITS
+
+deficit_penalties_energy_modifier = {
+	planet_jobs_minerals_produces_mult = -1.0
+	ship_weapon_damage = -1.0
+	army_damage_mult = -1.0
+	ship_shield_mult = -1.0
+	spy_network_levels_add = -100
+}
+
+deficit_penalties_minerals_modifier = {
+	planet_jobs_alloys_produces_mult = -1.0
+	planet_jobs_consumer_goods_produces_mult = -1.0
+	
+	lithoid_pop_happiness = -0.5
+	lithoid_pop_growth_speed_reduction = 1.0
+}
+
+deficit_penalties_food_modifier = {
+	biological_pop_happiness = -0.50
+	biological_pop_growth_speed_reduction = 1.0
+	planet_pop_assembly_organic_reduction = 1.0
+}
+
+deficit_penalties_alloys_modifier = {
+	ship_armor_mult = -1.0
+	ship_fire_rate_mult = -1.0
+	planet_pop_assembly_reduction = 1.0
+}
+
+deficit_penalties_consumer_goods_modifier = {
+	pop_happiness = -0.5
+	planet_jobs_unity_produces_mult = -1.0
+	planet_jobs_society_research_produces_mult = -1.0
+	planet_jobs_engineering_research_produces_mult = -1.0
+	planet_jobs_physics_research_produces_mult = -1.0
+}
+
+deficit_penalties_volatile_motes_modifier = {
+	planet_jobs_produces_mult = -0.5
+}
+
+deficit_penalties_exotic_gases_modifier = {
+	planet_jobs_produces_mult = -0.5
+}
+
+deficit_penalties_rare_crystals_modifier = {
+	planet_jobs_produces_mult = -0.5
+}
