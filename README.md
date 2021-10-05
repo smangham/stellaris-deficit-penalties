@@ -26,6 +26,8 @@ These are based on the vanilla deficit penalties, to keep things simple.
 [h1]FAQ:[/h1]
 [b]Can I still do the 'buy 1 unit from the market just before the end of the month' trick to avoid the effects of a deficit?[/b]
 Yes, though given the penalty is no longer as harsh for small deficits, it's probably not worth your time.
+[b]Does this account for catalytic production empires?[/b]
+Yes! You'll see a slightly weird modifier that seems to [i]add[/i]  a flat amount of alloys as well as one that removes a %age amount, because of the way Paradox have implemented deficit penalties for the job, but it works.
 
 [h1]My other mods:[/h1]
 If you like this, you might also like:
