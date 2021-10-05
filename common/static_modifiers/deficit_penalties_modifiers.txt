@@ -16,11 +16,37 @@ deficit_penalties_minerals_modifier = {
 	lithoid_pop_growth_speed_reduction = 1.0
 }
 
+
 deficit_penalties_food_modifier = {
 	biological_pop_happiness = -0.50
 	biological_pop_growth_speed_reduction = 1.0
 	planet_pop_assembly_organic_reduction = 1.0
 }
+
+# ==============================================================================
+# CATALYTIC EMPIRES
+# ==============================================================================
+# Catalytic empires use food, not minerals, to produce alloys
+deficit_penalties_minerals_modifier_catalytic = {
+	planet_jobs_consumer_goods_produces_mult = -1.0
+	
+	lithoid_pop_happiness = -0.5
+	lithoid_pop_growth_speed_reduction = 1.0
+}
+
+# This is complicated as by default, any food deficit removes -1.5 from the job production
+# So we need to add it back, then apply the scaling modifier
+deficit_penalties_food_base_catalytic = {
+	planet_metallurgists_alloys_produces_add = 1.5
+}
+deficit_penalties_food_modifier_catalytic = {
+	biological_pop_happiness = -0.50
+	biological_pop_growth_speed_reduction = 1.0
+	planet_pop_assembly_organic_reduction = 1.0
+
+	planet_jobs_alloys_produces_mult = -1.0
+}
+# ==============================================================================
 
 deficit_penalties_alloys_modifier = {
 	ship_armor_mult = -1.0

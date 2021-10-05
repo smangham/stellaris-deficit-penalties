@@ -145,11 +145,25 @@ country_event = {
 		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
 		# won't re-apply it over itself next month and it then times out the next day.
 		# So, we need to remove the old 31-day modifier, then re-add it.
-		remove_modifier = deficit_penalties_minerals_modifier
-		add_modifier = {
-			modifier = deficit_penalties_minerals_modifier
-			days = 31
-			multiplier = deficit_penalties_minerals_multiplier
+		if = {
+			limit = {
+				is_catalytic_empire = yes
+			}
+			remove_modifier = deficit_penalties_minerals_modifier_catalytic
+			add_modifier = {
+				modifier = deficit_penalties_minerals_modifier_catalytic
+				days = 31
+				multiplier = deficit_penalties_minerals_multiplier
+			}
+			log = "Catalytic empire mineral deficit"
+		}
+		else = {
+			remove_modifier = deficit_penalties_minerals_modifier
+			add_modifier = {
+				modifier = deficit_penalties_minerals_modifier
+				days = 31
+				multiplier = deficit_penalties_minerals_multiplier
+			}
 		}
 	
 		clear_variable = deficit_penalties_minerals_income
@@ -297,13 +311,33 @@ country_event = {
 		# it's removed before income is calculated. But if we add the modifier for 31 days, then the game
 		# won't re-apply it over itself next month and it then times out the next day.
 		# So, we need to remove the old 31-day modifier, then re-add it.
-		remove_modifier = deficit_penalties_food_modifier
-		add_modifier = {
-			modifier = deficit_penalties_food_modifier
-			days = 31
-			multiplier = deficit_penalties_food_multiplier
+		if = {
+			limit = {
+				is_catalytic_empire = yes
+			}
+			remove_modifier = deficit_penalties_food_base_catalytic
+			remove_modifier = deficit_penalties_food_modifier_catalytic
+
+			add_modifier = {
+				modifier = deficit_penalties_food_base_catalytic
+				days	 = 31
+			}
+			add_modifier = {
+				modifier = deficit_penalties_food_modifier_catalytic
+				days	 = 31
+				multiplier = deficit_penalties_food_multiplier
+			}
+			log = "Catalytic empire food deficit"
 		}
-	
+		else = {
+			remove_modifier = deficit_penalties_food_modifier
+			add_modifier = {
+				modifier = deficit_penalties_food_modifier
+				days	 = 31
+				multiplier = deficit_penalties_food_multiplier
+			}
+		}
+
 		clear_variable = deficit_penalties_food_income
 		clear_variable = deficit_penalties_food_deficit
 		clear_variable = deficit_penalties_food_multiplier	

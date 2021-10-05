@@ -2,6 +2,8 @@
 
  deficit_penalties_minerals_modifier:0 "Minerals Deficit"
  deficit_penalties_minerals_modifier_desc:0 "We are consuming more minerals than we produce."
+ deficit_penalties_minerals_modifier_catalytic:0 "$deficit_penalties_minerals_modifier$@"
+ deficit_penalties_minerals_modifier_catalytic_desc:0 "$deficit_penalties_minerals_modifier_desc$@"
  minerals_deficit_tooltip:0 "We are consuming more minerals than we produce. Check Empire Modifiers for details."
 
  deficit_penalties_energy_modifier:0 "Energy Deficit"
@@ -10,6 +12,10 @@
 
  deficit_penalties_food_modifier:0 "Food Deficit"
  deficit_penalties_food_modifier_desc:0 "We are consuming more food than we produce."
+ deficit_penalties_food_modifier_catalytic:0 "$deficit_penalties_food_modifier$@"
+ deficit_penalties_food_modifier_catalytic_desc:0 "$deficit_penalties_food_modifier_desc$@"
+ deficit_penalties_food_base_catalytic:0 "Food Deficit (Catalytic Empire)"
+ deficit_penalties_food_base_catalytic_desc:0 "This adjusts for the unusual way food shortfalls are applied alloy production in Catalytic Empires."
  food_deficit_tooltip:0 "We are consuming more food than we produce. Check Empire Modifiers for details."
 
  deficit_penalties_alloys_modifier:0 "Alloys Deficit"
