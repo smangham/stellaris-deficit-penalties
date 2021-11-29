@@ -1,4 +1,4 @@
-[b]Version 3.1.*[/b]
+[b]Version 3.2.*[/b]
 
 In vanilla Stellaris, penalties don't scale with the size of resource deficits. Missing 1 food or 1000 has the same effect, making tiny oversights punishing and sweeping structural problems broadly ignorable.
 
@@ -33,6 +33,7 @@ Yes! You'll see a slightly weird modifier that seems to [i]add[/i]  a flat amoun
 If you like this, you might also like:
 [list]
 	[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1355094979]Claims Decay - Dynamic Diplomacy:[/url] Friendly empires will renounce their claims on each other over time. Diplomatic Grants makes neutral empires do it too.
+	[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2618464838]Deficit Penalties - Reasonable Reductions:[/url] Makes the penalties for going into deficit scale gradually with the size of the deficit.
 	[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1417954591]Gateway Icons - Construction Notification:[/url] Gateway construction sites appear on the galaxy map just like broken gateways.
 	[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1319264195]Loyal Subjects Have Nothing to Fear (from the Colossus):[/url] Loyal vassals and tributaries no longer suffer opinion penalties when you crack a planet.
 [/list]
